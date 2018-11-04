@@ -1,0 +1,23 @@
+{
+  "name": "edva",
+  "version": "1.0.0",
+  "description": "Project for CMPE 172",
+  "main": "fire.js",
+  "dependencies": {
+    "firebase": "^5.5.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronjohn2/EmployerDatabaseViewApplication.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication/issues"
+  },
+  "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme"
+}
