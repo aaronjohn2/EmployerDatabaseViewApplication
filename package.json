@@ -2,13 +2,21 @@
   "name": "edva",
   "version": "1.0.0",
   "description": "Project for CMPE 172",
-  "main": "fire.js",
+  "main": "src/login/fire.js",
   "dependencies": {
-    "firebase": "^5.5.7"
+    "firebase": "^5.5.7",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-firebaseui": "^3.1.2",
+    "react-scripts": "^2.1.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -19,5 +27,11 @@
   "bugs": {
     "url": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication/issues"
   },
-  "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme"
+  "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
