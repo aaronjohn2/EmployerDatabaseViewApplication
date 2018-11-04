@@ -8,7 +8,7 @@ var config = {
     projectId: "edva-cmpe172",
     storageBucket: "edva-cmpe172.appspot.com",
     messagingSenderId: "606646992739"
-}
+};
 
 const fire= firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
