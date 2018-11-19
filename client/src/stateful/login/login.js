@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {Header,Form,Segment,Button} from 'semantic-ui-react';
-import './loginModal.css';
+import './login.css';
 import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 

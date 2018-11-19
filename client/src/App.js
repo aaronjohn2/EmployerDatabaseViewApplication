@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import LandingPage from './stateful_components/landingPage/landingpage'
+import LandingPage from './stateful/landing/landingpage'
 class App extends Component {
     render() {
         return (

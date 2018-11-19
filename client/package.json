@@ -2,7 +2,7 @@
   "name": "edva",
   "version": "1.0.0",
   "description": "Project for CMPE 172",
-  "main": "src/login/fire.js",
+  "main": "src/stateless/firebaseAuth/fire.js",
   "dependencies": {
     "firebase": "^5.5.7",
     "react": "^16.6.0",
