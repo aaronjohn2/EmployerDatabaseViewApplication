@@ -3,6 +3,9 @@
 Project for CMPE 172
 
 Instructions to start:
-npm install
+
+```
+npm run install-all
 npm start
+```
 
