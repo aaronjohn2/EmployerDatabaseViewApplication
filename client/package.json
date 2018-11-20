@@ -2,22 +2,25 @@
   "name": "edva",
   "version": "1.0.0",
   "description": "Project for CMPE 172",
-  "main": "src/stateless/firebaseAuth/fire.js",
+  "main": "src/firebase/firebase.js",
   "dependencies": {
     "firebase": "^5.5.7",
     "react": "^16.6.0",
+    "react-delay": "^0.1.0",
     "react-dom": "^16.6.0",
     "react-firebaseui": "^3.1.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
     "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "react-scripts start",
+    "start":  "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aaronjohn2/EmployerDatabaseViewApplication.git"
