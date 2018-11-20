@@ -1,0 +1,24 @@
+{
+  "name": "EmployerDatabaseViewApplication",
+  "version": "1.0.0",
+  "description": "Project for CMPE 172",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server && node server.js\" \"cd client && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronjohn2/EmployerDatabaseViewApplication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication/issues"
+  },
+  "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
