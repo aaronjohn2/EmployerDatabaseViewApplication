@@ -1,9 +1,9 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
-require('dotenv').config();
 
 const API_PORT = 3001;
 const app = express();
@@ -14,7 +14,9 @@ const host = process.env.DB_HOST;
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 
-const dbRoute = "mongodb://" + user + ":" + pass + host;
+// const dbRoute = "mongodb://stivens:1234567890a@ds037824.mlab.com:37824/edva";
+const dbRoute = "mongodb://" + user + ":" + pass + "@" + host;
+console.log(dbRoute);
 
 // connects our back end code with the database
 mongoose.connect(
