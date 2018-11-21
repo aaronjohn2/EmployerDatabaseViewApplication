@@ -8,3 +8,10 @@
 .btn__logout:hover {
     background-color: rgb(197, 63, 63);
 }
+.btn__logout {float: right}
+
+
+#com {
+    display: flex;
+    border: 1px;
+}

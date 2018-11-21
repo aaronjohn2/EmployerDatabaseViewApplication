@@ -16,17 +16,11 @@ const Layout = ({ children, contentCenter }) => {
     return (
         <section>
             <header>
-                <h1>OAuth Authentication with Firebase</h1>
+                <h1>Employer Database View Application</h1>
             </header>
             <main className={contentCenter ? 'content-center' : ''}>{children}</main>
             <footer>
-                <p>
-                    Made with{' '}
-                    <span role="img" aria-label="heart emoji">
-            ??
-          </span>{' '}
-                    by Esau Silva
-                </p>
+
             </footer>
         </section>
     );
