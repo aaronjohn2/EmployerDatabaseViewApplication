@@ -1,4 +1,4 @@
-
+// Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
 import './Home.css';
 

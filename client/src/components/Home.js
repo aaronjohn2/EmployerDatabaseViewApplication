@@ -1,5 +1,9 @@
+// Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
+import Navbar1 from './Navbar1.js';
+import EmployeeInfo from './EmployeeInfo.js';
 import './Home.css';
+
 
 class Home extends  Component {
     constructor(props) {
@@ -21,7 +25,11 @@ class Home extends  Component {
 
     render() {
         return (
+
             <div>
+
+            <Navbar1/>
+
                 <div>
                     <form onSubmit={this.handleSubmit}>
 
@@ -42,9 +50,7 @@ class Home extends  Component {
                 </div>
 
                 <div>
-                   <p>test</p>
-
-
+                    <EmployeeInfo/>
                 </div>
 
 
