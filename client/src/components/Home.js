@@ -1,9 +1,10 @@
 // Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
-import Navbar1 from './Navbar1.js';
 import EmployeeInfo from './EmployeeInfo.js';
 import './Home.css';
 
+import Layout from '../containers/Layout';
+import { auth } from '../firebase';
 
 class Home extends  Component {
     constructor(props) {
@@ -27,8 +28,6 @@ class Home extends  Component {
         return (
 
             <div>
-
-            <Navbar1/>
 
                 <div>
                     <form onSubmit={this.handleSubmit}>
