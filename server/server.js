@@ -1,9 +1,17 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
+
+// import express from 'express';
 const express = require("express");
+
+// mongoose connection don't wait
+mongoose. Promise = global.Promise;
+
+let routes = require('./routes/svrRoutes');
+
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const Data = require("./data");
+const datamMdel = require("./models/svrDataModel");
 
 const API_PORT = 3001;
 const app = express();
@@ -36,6 +44,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+/*
 
 // this is our get method
 // this method fetches all available data in our database
@@ -86,9 +95,29 @@ router.post("/putData", (req, res) => {
         return res.json({ success: true });
     });
 });
+*/
 
 // append /api for our http requests
 app.use("/api", router);
+
+//@api "adduser"
+
+// @api "/registercompany"
+// function registerCompany(data) {
+//     if data.uid != null {
+//         error;
+//     }
+//     db.insert(table_name, data);
+// }
+// run the routes
+routes(app);
+
+// serving static files
+app.use(express.static('public'));
+
+app.get('/data', (req, res) =>
+    res.send(`Node and express server are running on port ${API_PORT}`)
+);
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

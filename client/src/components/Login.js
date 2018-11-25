@@ -34,6 +34,8 @@ class Login extends Component {
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
             if (user) {
+                let user_uid = user.uid;
+                let user_email = user.email;
                 this.props.history.push('/dashboard');
             }
         });
