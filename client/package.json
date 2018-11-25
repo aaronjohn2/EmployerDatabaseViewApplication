@@ -4,13 +4,16 @@
   "description": "Project for CMPE 172",
   "main": "src/firebase/firebase.js",
   "dependencies": {
+    "bootstrap": "^4.1.3",
     "firebase": "^5.5.7",
-    "react": "^16.6.0",
+    "mdbreact": "^4.8.3",
+    "react": "^16.6.3",
     "react-delay": "^0.1.0",
-    "react-dom": "^16.6.0",
+    "react-dom": "^16.6.3",
     "react-firebaseui": "^3.1.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
+    "reactstrap": "^6.5.0",
     "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {},
