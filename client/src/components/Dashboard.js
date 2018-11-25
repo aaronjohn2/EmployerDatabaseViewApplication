@@ -1,3 +1,5 @@
+// Author: Nikita, Tahsin, Raghav;
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -92,15 +94,6 @@ class Dashboard extends Component {
         return (
             <Layout>
 
-                <button
-                    className="btn__logout"
-                    onClick={() => auth.getAuth().signOut()}
-                >
-                    Logout
-                </button>
-
-
-                <h3>Secure Area</h3>
                 <SocialProfileList
                     auth={auth.getAuth}
                     providerData={this.state.providerData}

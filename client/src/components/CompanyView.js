@@ -1,6 +1,6 @@
-
+// Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
-import './CompanyView.css';
+import './Home.css';
 
 class CompanyView extends Component {
     constructor(props) {
