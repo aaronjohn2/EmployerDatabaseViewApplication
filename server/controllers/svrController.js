@@ -90,6 +90,23 @@ module.exports.updateDataByID = (req, res) => {
     });
 };
 
+module.exports.updateUserByID = (req, res) => {
+
+        let data = {
+            "access_level": req.body["access_level"],
+            "company": req.body["company"]
+        };
+
+        UserColl.findOneAndUpdate({ uid: req.params.userId}, data, {new: true}, (err, userItem) => {
+
+            if (err) {
+            res.send(err);
+        }
+        res.json(userItem);
+    });
+};
+
+
 module.exports.deleteDataByID = (req, res) => {
     DataColl.remove({ _id: req.params.dataId},  (err, dataItem) => {
         if (err) {
