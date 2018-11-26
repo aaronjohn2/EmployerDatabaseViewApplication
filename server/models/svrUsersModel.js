@@ -4,7 +4,7 @@ const mongoose = require("mongoose"),
 Schema.exports = mongoose.model('userModel',{
     uid: String,
     email: String,
-    access_type: Number,
+    access_level: Number,
     company: String,
     create_date: {
         type: Date,
