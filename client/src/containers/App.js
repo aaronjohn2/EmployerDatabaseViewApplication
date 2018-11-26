@@ -6,7 +6,6 @@ import Dashboard from '../components/Dashboard';
 import About from '../components/About';
 import Home from '../components/Home';
 import withAuthentication from '../containers/withAuthentication';
-import Navbar1 from '../components/Navbar1';
 import Footer1 from '../components/Footer1';
 //import 'bootstrap/dist/css/bootstrap.css';
 import 'mdbreact/dist/css/mdb.css';

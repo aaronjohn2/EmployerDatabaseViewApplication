@@ -25,7 +25,7 @@ class Navbar2 extends Component {
     }
     render() {
         return (
-            <div>
+            <div >
                 <Navbar color="light" light expand="md">
                     <NavbarBrand href="/">EDVA</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />

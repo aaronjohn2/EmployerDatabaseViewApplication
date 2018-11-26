@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "concurrently": "^4.1.0",
     "reactstrap": "^6.5.0"
   }
