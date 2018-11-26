@@ -9,7 +9,8 @@ let {
     deleteDataByID,
     addNewUser,
     getUserByID,
-    getUser
+    getUser,
+    updateUserByID
 } = require('../controllers/svrController');
 
 const routes = (app) => {
@@ -42,11 +43,11 @@ const routes = (app) => {
             console.log(`Request from: ${req.originalUrl}`);
             console.log(`Request type: ${req.method}`);
             next();
-        }, getUser)
-    ;
+        }, getUser);
     app.route('/user/:userId')
-        .get(getUserByID);
-
+        .get(getUserByID)
+    // put request
+        .put(updateUserByID);
 };
 
 module.exports = routes;
