@@ -15,6 +15,7 @@ Schema.exports = mongoose.model('dataModel',{
     salary: Number,
     manager_id: String,
     company:String,
+    email:String,
     access_level: Number,
     create_date: {
         type: Date,
