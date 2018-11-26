@@ -7,10 +7,6 @@ import { auth } from '../firebase';
 import Navbar2 from '../components/Navbar2';
 import 'bootstrap/dist/css/bootstrap.css';
 
-
-
-let user_uid = "";
-
 const buttonList = {
     google: {
         visible: true,
@@ -40,9 +36,6 @@ class Login extends Component {
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
             if (user) {
-                user_uid = user.uid;
-                console.log("user logged in: " + user_uid);
-                let user_email = user.email;
                 this.props.history.push('/dashboard');
             }
         });
@@ -63,10 +56,6 @@ class Login extends Component {
             </div>
         );
     }
-}
-
-export function get_uid() {
-    return user_uid;
 }
 
 export default Login;

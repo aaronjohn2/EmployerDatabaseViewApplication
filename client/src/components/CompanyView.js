@@ -1,7 +1,6 @@
 // Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
 import './Home.css';
-import {get_uid} from "./Login";
 
 import { auth } from '../firebase';
 
