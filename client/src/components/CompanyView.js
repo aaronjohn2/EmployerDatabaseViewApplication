@@ -3,16 +3,15 @@ import React, { Component } from 'react';
 import './Home.css';
 import {get_uid} from "./Login";
 
+import { auth } from '../firebase';
 
 class CompanyView extends Component {
     constructor(props) {
         super(props);
 
-        const uid = get_uid();
-
         this.state = {
             value: '',
-            user_uid: uid
+            user_uid: auth.getAuth().currentUser.uid
         };
 
 
