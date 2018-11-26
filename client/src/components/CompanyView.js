@@ -1,11 +1,22 @@
 // Author: Tahsin Hossain, Raghav Gupta;
 import React, { Component } from 'react';
 import './Home.css';
+import {get_uid} from "./Login";
+
 
 class CompanyView extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+
+        const uid = get_uid();
+
+        this.state = {
+            value: '',
+            user_uid: uid
+        };
+
+
+        console.log(this.state.user_uid);
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,9 +48,6 @@ class CompanyView extends Component {
                                 Company Name:
                             </label>
 
-
-
-
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
 
                         </div>
@@ -56,14 +64,15 @@ class CompanyView extends Component {
                         </div>
 
                         <div id="boxborder">
+                            <p>Your UID: </p>
                             <label>
-                                Company Name
+                                {this.state.user_uid}
                             </label>
                         </div>
 
                         <div id="boxborder">
                             <label>
-                                Send to Manager
+                                Send your UID to the company anager
                             </label>
                         </div>
                     </div>
