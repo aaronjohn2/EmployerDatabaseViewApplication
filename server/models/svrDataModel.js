@@ -11,11 +11,12 @@ Schema.exports = mongoose.model('dataModel',{
         type:String,
         required: 'Enter a last name'
     },
+    email: String,
     position: String,
     salary: Number,
     manager_id: String,
     company:String,
-    email:String,
+    storage: String,
     access_level: Number,
     create_date: {
         type: Date,
