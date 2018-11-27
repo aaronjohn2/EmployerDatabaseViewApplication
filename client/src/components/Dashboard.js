@@ -8,6 +8,8 @@ import SocialProfileList from './SocialProfileList';
 import { auth } from '../firebase';
 
 import CompanyView from './CompanyView.js';
+import Navbar1 from '../components/Navbar1';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 import './Dashboard.css';
@@ -92,6 +94,9 @@ class Dashboard extends Component {
 
     render() {
         return (
+
+            <div>
+                <Navbar1/>
             <Layout>
 
                 <SocialProfileList
@@ -102,6 +107,7 @@ class Dashboard extends Component {
                 <CompanyView/>
 
             </Layout>
+            </div>
 
 
 

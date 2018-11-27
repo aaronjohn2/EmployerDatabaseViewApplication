@@ -6,14 +6,10 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    NavLink } from 'reactstrap';
 import * as auth from "../firebase/auth";
 
-class Navbar1 extends Component {
+class Navbar2 extends Component {
     constructor(props) {
         super(props);
 
@@ -29,29 +25,19 @@ class Navbar1 extends Component {
     }
     render() {
         return (
-            <div>
+            <div >
                 <Navbar color="light" light expand="md">
                     <NavbarBrand href="/">EDVA</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/Dashboard/">Dashboard</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="/Home/">Home</NavLink>
+                                <NavLink href="/About/">About</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/aaronjohn2/EmployerDatabaseViewApplication.git">Github</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <button
-                                    className="btn__logout"
-                                    onClick={() => auth.getAuth().signOut()}
-                                >
-                                    Logout
-                                </button>
-                            </NavItem>
+
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -60,4 +46,4 @@ class Navbar1 extends Component {
     }
 }
 
- export default Navbar1;
+export default Navbar2;

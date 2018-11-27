@@ -1,9 +1,13 @@
 import React from 'react';
+import Navbar2 from '../components/Navbar2';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import Layout from '../containers/Layout';
 
 const About = () => {
     return (
+        <div>
+            <Navbar2/>
         <Layout>
             <h2>About</h2>
             <p>
@@ -16,6 +20,7 @@ const About = () => {
                 alcatra.
             </p>
         </Layout>
+            </div>
     );
 };
 

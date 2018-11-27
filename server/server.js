@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 // import express from 'express';
 const express = require("express");
+const cors = require('cors')
 
 // mongoose connection don't wait
 mongoose. Promise = global.Promise;
@@ -44,6 +45,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+app.use(cors());
 /*
 
 // this is our get method
