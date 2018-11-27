@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import SocialButtonList from './SocialButtonList';
 import { auth } from '../firebase';
+import Navbar2 from '../components/Navbar2';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const buttonList = {
     google: {
@@ -28,12 +30,12 @@ const buttonList = {
     }
 };
 
+
+
 class Login extends Component {
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
             if (user) {
-                let user_uid = user.uid;
-                let user_email = user.email;
                 this.props.history.push('/dashboard');
             }
         });
@@ -41,11 +43,17 @@ class Login extends Component {
 
     render() {
         return (
+
+            <div>
+                <Navbar2/>
+
             <Layout contentCenter={true}>
-                <p>Connect With</p>
+
+                <p>Signin using Google Single Sign-on</p>
                 <SocialButtonList buttonList={buttonList} auth={auth.getAuth} />
-                <Link to="/about">About</Link>
+                //<Link to="/about">About</Link>
             </Layout>
+            </div>
         );
     }
 }
