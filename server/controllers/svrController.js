@@ -15,8 +15,9 @@ module.exports.addNewData = (req, res) => {
             res.send(err);
         } else if (dataItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
@@ -28,8 +29,9 @@ module.exports.addNewUser = (req, res) => {
             res.send(err);
         } else if (userItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
@@ -39,8 +41,9 @@ module.exports.getData = (req, res) => {
             res.send(err);
         } else if (dataItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
@@ -50,8 +53,9 @@ module.exports.getUser = (req, res) => {
             res.send(err);
         } else if (userItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
@@ -63,19 +67,21 @@ module.exports.getDataByID = (req, res) => {
         res.send(err);
     } else if (dataItem.length === 0) {
         res.send(404)
-    }
+    } else {
         res.json(dataItem);
+    }
     })
 };
 
 module.exports.getUserByID = (req, res) => {
     UserColl.find({uid: req.params.userId}, (err, userItem) => {
         if (err) {
-            res.send(err);
+            res.send(err)
         } else if (userItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
@@ -96,8 +102,9 @@ module.exports.updateDataByID = (req, res) => {
             res.send(err);
         } else if (dataItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
@@ -113,8 +120,9 @@ module.exports.updateUserByID = (req, res) => {
             res.send(err);
         } else if (userItem.length === 0) {
             res.send(404)
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
