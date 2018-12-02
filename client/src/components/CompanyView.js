@@ -13,7 +13,6 @@ class CompanyView extends Component {
             user_uid: auth.getAuth().currentUser.uid
         };
 
-
         console.log(this.state.user_uid);
 
         this.handleChange = this.handleChange.bind(this);

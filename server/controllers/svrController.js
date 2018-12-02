@@ -62,9 +62,11 @@ module.exports.getDataByID = (req, res) => {
 
 module.exports.getUserByID = (req, res) => {
     console.log(req.params.userId);
-    UserColl.find({uid: req.params.userId}, (err, userItem) => {
+    UserColl.findOne({uid: req.params.userId}, (err, userItem) => {
         if (err) {
             res.send(err);
+        } else if ( !res.data.length) {
+            res.status(404).save();
         }
         res.json(userItem);
     });

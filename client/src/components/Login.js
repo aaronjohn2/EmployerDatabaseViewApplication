@@ -6,6 +6,9 @@ import SocialButtonList from './SocialButtonList';
 import { auth } from '../firebase';
 import Navbar2 from '../components/Navbar2';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
+
+export const host_url = 'http://localhost:3001';
 
 const buttonList = {
     google: {
@@ -36,7 +39,36 @@ class Login extends Component {
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.push('/dashboard');
+                console.log('User logged in as: ' + user.uid);
+                axios.get(host_url + '/user/' + user.uid)
+                    .then( res => {
+                        if (res.status === 200) {
+                            console.log(res.data, res.data['company']);
+                            if (res.data['company'] != null && res.data['company'] != ''
+                            && res.data['company'].length > 1) {
+                                this.props.history.push('/home');
+                            } else {
+                                this.props.history.push('/dashboard');
+                            }
+                        } else {
+                            let data = {
+                                uid: user.uid,
+                                email: user.email,
+                                access_level: '',
+                                company: ''
+                            };
+                            axios.post(host_url + '/data', data)
+                                .then( (res) => {
+                                    if(res.data._id) {
+                                        console.log(res)
+                                        // this.props.history.push('/dashboard');
+                                    } else {
+                                        alert('Couldnt register your account, try again');
+                                    }
+                                } )
+                        }
+                    })
+
             }
         });
     }

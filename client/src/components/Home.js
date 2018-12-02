@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Layout from '../containers/Layout';
 import { auth } from '../firebase';
+import AddManager from "./AddManager";
 
 class Home extends  Component {
     constructor(props) {
@@ -32,36 +33,17 @@ class Home extends  Component {
             <div>
                 <Navbar1/>
                 <div>
-                    <form onSubmit={this.handleSubmit}>
-
-                         <div id="addmanager">
-
-                             <label>
-                                  Add Manager :
-                             </label>
-                                <input type="text" value={this.state.value} onChange={this.handleChange} size="50" />
-
-                                <input type="submit" value="Submit" />
-
-                         </div>
-
-
-
-                      </form>
+                    <AddManager/>
                 </div>
 
                 <div>
                     <EmployeeInfo/>
                 </div>
 
-
             </div>
 
         );
     }
 }
-
-
-
 
 export default Home;

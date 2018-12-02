@@ -44,7 +44,7 @@ class EmployeeInfo extends React.PureComponent {
 
         const {
             uid, first_name, last_name, email, salary, manager_id, position, company
-        } = data
+        } = data;
 
         if (!uid || uid === '') {
             alert('ID cannot be left blank');
@@ -90,7 +90,7 @@ class EmployeeInfo extends React.PureComponent {
         //console.log(data);
 
         return true;
-    }
+    };
 
 
 
@@ -121,8 +121,7 @@ class EmployeeInfo extends React.PureComponent {
                             ];
                             console.log(rows);
                             this.setState({ rows });
-                        }
-                        else {
+                        } else {
                             alert('unable to add. please check the data you entered');
                         }
                     })
@@ -163,7 +162,7 @@ class EmployeeInfo extends React.PureComponent {
                                 this.setState({ rows });
                             }
                         });
-                };
+                }
             })
 
 
@@ -185,7 +184,7 @@ class EmployeeInfo extends React.PureComponent {
                             _id, uid, first_name, last_name, email, salary, manager_id, position, company,
                             id: index
                         })
-                    })
+                    });
 
                     this.setState({ rows: newRowsState})
                 } else {
