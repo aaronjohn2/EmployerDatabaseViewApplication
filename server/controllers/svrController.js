@@ -10,12 +10,14 @@ const UserColl = mongoose.model('userModel', UsersSchema );
 
 module.exports.addNewData = (req, res) => {
     let newDataItem = new DataColl(req.body);
-
     newDataItem.save((err, dataItem) =>{
         if (err) {
             res.send(err);
+        } else if (dataItem.length === 0) {
+            res.send(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
@@ -25,19 +27,23 @@ module.exports.addNewUser = (req, res) => {
     newUserItem.save((err, userItem) =>{
         if (err) {
             res.send(err);
+        } else if (userItem.length === 0) {
+            res.send(404);
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
-
-
 
 module.exports.getData = (req, res) => {
     DataColl.find({}, (err, dataItem) =>{
         if (err) {
             res.send(err);
+        } else if (dataItem.length === 0) {
+            res.status(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
@@ -45,28 +51,39 @@ module.exports.getUser = (req, res) => {
     UserColl.find({}, (err, userItem) =>{
         if (err) {
             res.send(err);
+        } else if (userItem.length === 0) {
+            console.log('Empty response, return 404');
+            res.status(404);
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
 
 module.exports.getDataByID = (req, res) => {
-    DataColl.findById(req.params.dataId, (err, dataItem) => {
+    DataColl.find({uid: req.params.dataId}, (err, dataItem) => {
+        console.log(dataItem.length);
     if (err) {
         res.send(err);
+    } else if (dataItem.length === 0) {
+        res.status(404)
+    } else {
+        res.json(dataItem);
     }
-    res.json(dataItem);
-    });
+    })
 };
 
 module.exports.getUserByID = (req, res) => {
-    console.log(req.params.userId);
     UserColl.find({uid: req.params.userId}, (err, userItem) => {
         if (err) {
-            res.send(err);
+            res.send(err)
+        } else if (userItem.length === 0) {
+            console.log('Empty response, return 404');
+            res.send(404);
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
@@ -85,12 +102,17 @@ module.exports.updateDataByID = (req, res) => {
     DataColl.findOneAndUpdate({ _id: req.params.dataId}, req.body, {new: true}, (err, dataItem) => {
         if (err) {
             res.send(err);
+        } else if (dataItem.length === 0) {
+            res.status(404)
+        } else {
+            res.json(dataItem);
         }
-        res.json(dataItem);
     });
 };
 
 module.exports.updateUserByID = (req, res) => {
+
+        console.log('User data to update' + req.body);
 
         let data = {
             "access_level": req.body["access_level"],
@@ -99,10 +121,13 @@ module.exports.updateUserByID = (req, res) => {
 
         UserColl.findOneAndUpdate({ uid: req.params.userId}, data, {new: true}, (err, userItem) => {
 
-            if (err) {
+        if (err) {
             res.send(err);
+        } else if (userItem.length === 0) {
+            res.status(404)
+        } else {
+            res.json(userItem);
         }
-        res.json(userItem);
     });
 };
 
@@ -115,4 +140,3 @@ module.exports.deleteDataByID = (req, res) => {
         res.json({message: 'Successfully deleted contact'});
     });
 };
-

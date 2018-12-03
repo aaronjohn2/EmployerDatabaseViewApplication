@@ -12,6 +12,8 @@ import axios from 'axios';
 
 const getRowId = row => row.id;
 
+const host_url = 'http://localhost:3001';
+
 class EmployeeInfo extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -42,40 +44,40 @@ class EmployeeInfo extends React.PureComponent {
 
         const {
             uid, first_name, last_name, email, salary, manager_id, position, company
-        } = data
+        } = data;
 
         if (!uid || uid === '') {
-            alert('ID cannot be left blank')
+            alert('ID cannot be left blank');
             return false;
         }
 
         if (!first_name || first_name === '') {
-            alert('First Name cannot be left blank')
+            alert('First Name cannot be left blank');
             return false;
         }
 
         if (!last_name || last_name ==='') {
-            alert('Last Name cannot be left blank')
+            alert('Last Name cannot be left blank');
             return false;
         }
         if (!email || email === '') {
-            alert('Email cannot be left blank')
+            alert('Email cannot be left blank');
             return false;
         }
         if (!salary || salary === '') {
-            alert('Salary cannot be left blank')
+            alert('Salary cannot be left blank');
             return false;
         }
         if (!manager_id || manager_id ==='') {
-            alert('Manager id cannot be left blank')
+            alert('Manager id cannot be left blank');
             return false;
         }
         if (!position || position === '') {
-            alert('Position cannot be left blank')
+            alert('Position cannot be left blank');
             return false;
         }
         if (!company || company ==='') {
-            alert('Company name cannot be left blank')
+            alert('Company name cannot be left blank');
             return false;
         }
 
@@ -88,14 +90,14 @@ class EmployeeInfo extends React.PureComponent {
         //console.log(data);
 
         return true;
-    }
+    };
 
 
 
     commitChanges({ added, changed, deleted }) {
         let { rows } = this.state;
         // const data = added[0];
-        // axios.post('http://localhost:3001/data', data)
+        // axios.post(host_url + '/data', data)
         //     .then((data) => console.log(data))
         //     .catch(err => console.log(err))
 
@@ -105,7 +107,7 @@ class EmployeeInfo extends React.PureComponent {
             if (this.checkData(data)) {
                 //data = this.checkData(data);
 
-                axios.post('http://localhost:3001/data', data)
+                axios.post(host_url + '/data', data)
                     .then((res) => {
                         if(res.data._id) {
                             console.log(res);
@@ -119,8 +121,7 @@ class EmployeeInfo extends React.PureComponent {
                             ];
                             console.log(rows);
                             this.setState({ rows });
-                        }
-                        else {
+                        } else {
                             alert('unable to add. please check the data you entered');
                         }
                     })
@@ -139,7 +140,7 @@ class EmployeeInfo extends React.PureComponent {
                     if (this.checkData(data)) {
                         const id = data._id;
                         delete data['_id']
-                        axios.put(`http://localhost:3001/data/${id}`, data)
+                        axios.put(host_url + `/data/${id}`, data)
                             .then(res => {
                                 if (res.status === 200) {
                                     rows = rows.map(row => (changed[row.id] ? { ...row, ...changed[row.id] } : row));
@@ -153,7 +154,7 @@ class EmployeeInfo extends React.PureComponent {
         if (deleted) {
             rows.map(row => {
                 if (deleted[0] === row.id) {
-                    axios.delete(`http://localhost:3001/data/${row._id}`)
+                    axios.delete(host_url + `/data/${row._id}`)
                         .then(res => {
                             if (res.status === 200) {
                                 const deletedSet = new Set(deleted);
@@ -161,7 +162,7 @@ class EmployeeInfo extends React.PureComponent {
                                 this.setState({ rows });
                             }
                         });
-                };
+                }
             })
 
 
@@ -169,7 +170,7 @@ class EmployeeInfo extends React.PureComponent {
     }
 
     loadData = () => {
-        axios.get('http://localhost:3001/data') //endpoint route
+        axios.get(host_url + '/data') //endpoint route
             .then(res => {
                 if(res.status === 200) {
                     const rows = res.data;
@@ -183,7 +184,7 @@ class EmployeeInfo extends React.PureComponent {
                             _id, uid, first_name, last_name, email, salary, manager_id, position, company,
                             id: index
                         })
-                    })
+                    });
 
                     this.setState({ rows: newRowsState})
                 } else {

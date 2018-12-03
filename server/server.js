@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 
 // import express from 'express';
 const express = require("express");
-const cors = require('cors')
+const cors = require('cors');
 
 // mongoose connection don't wait
-mongoose. Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 let routes = require('./routes/svrRoutes');
 
@@ -111,15 +111,16 @@ app.use("/api", router);
 //     }
 //     db.insert(table_name, data);
 // }
+
 // run the routes
 routes(app);
 
 // serving static files
 app.use(express.static('public'));
 
-app.get('/data', (req, res) =>
-    res.send(`Node and express server are running on port ${API_PORT}`)
-);
+// app.get('/data', (req, res) =>
+//     res.send(`Node and express server are running on port ${API_PORT}`)
+// );
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

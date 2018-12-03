@@ -5,8 +5,9 @@ import './Home.css';
 import Navbar1 from '../components/Navbar1';
 import 'bootstrap/dist/css/bootstrap.css';
 
-//import Layout from '../containers/Layout';
-//import { auth } from '../firebase';
+import Layout from '../containers/Layout';
+import { auth } from '../firebase';
+import AddManager from "./AddManager";
 
 class Home extends  Component {
     constructor(props) {
@@ -18,11 +19,11 @@ class Home extends  Component {
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({companyName: event.target.companyName});
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        alert('A name was submitted: ' + this.state.companyName);
         event.preventDefault();
     }
 
@@ -32,36 +33,17 @@ class Home extends  Component {
             <div>
                 <Navbar1/>
                 <div>
-                    <form onSubmit={this.handleSubmit}>
-
-                         <div id="addmanager">
-
-                             <label>
-                                  Add Manager :
-                             </label>
-                                <input type="text" value={this.state.value} onChange={this.handleChange} size="50" />
-
-                                <input type="submit" value="Submit" />
-
-                         </div>
-
-
-
-                      </form>
+                    <AddManager/>
                 </div>
 
                 <div>
                     <EmployeeInfo/>
                 </div>
 
-
             </div>
 
         );
     }
 }
-
-
-
 
 export default Home;
