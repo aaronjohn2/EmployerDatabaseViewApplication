@@ -85,16 +85,21 @@ module.exports.getUserByID = (req, res) => {
     });
 };
 
-/*
+
 module.exports.getDataByManID = (req, res) => {
-    DataColl.findByManId(req.params.dataManId, (err, dataItem) => {
+    UserColl.find({uid: req.params.userId}, (err, userItem) => {
+        let obj = JSON.parse(userItem);
+    console.log(userItem);
+    console.log(obj["uid"]);
+
+//    DataColl.findByManId(req.params.dataManId, (err, dataItem) => {
         if (err) {
             res.send(err);
         }
-        res.json(dataItem);
-    });
+            res.json(userItem);
+        }
+    );
 };
-*/
 
 module.exports.updateDataByID = (req, res) => {
     DataColl.findOneAndUpdate({ _id: req.params.dataId}, req.body, {new: true}, (err, dataItem) => {

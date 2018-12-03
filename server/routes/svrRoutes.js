@@ -10,7 +10,8 @@ let {
     addNewUser,
     getUserByID,
     getUser,
-    updateUserByID
+    updateUserByID,
+    getDataByManID
 } = require('../controllers/svrController');
 
 const routes = (app) => {
@@ -48,6 +49,8 @@ const routes = (app) => {
         .get(getUserByID)
     // put request
         .put(updateUserByID);
+    app.route('/man/:userId')
+        .get(getDataByManID);
 };
 
 module.exports = routes;
