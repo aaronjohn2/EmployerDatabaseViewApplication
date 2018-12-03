@@ -31,7 +31,6 @@ const buttonList = {
 };
 
 
-
 class Login extends Component {
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
@@ -51,7 +50,7 @@ class Login extends Component {
 
                 <p>Signin using Google Single Sign-on</p>
                 <SocialButtonList buttonList={buttonList} auth={auth.getAuth} />
-                //<Link to="/about">About</Link>
+                <Link to="/searchtweets"> click to view EDVA's user review tweets</Link>
             </Layout>
             </div>
         );

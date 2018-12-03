@@ -7,7 +7,7 @@ import {
     Nav,
     NavItem,
     NavLink } from 'reactstrap';
-import * as auth from "../firebase/auth";
+//import * as auth from "../firebase/auth";
 
 class Navbar2 extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class Navbar2 extends Component {
     render() {
         return (
             <div >
-                <Navbar color="light" light expand="md">
+                <Navbar className="navbar navbar-expand-sm bg-success navbar-dark" >
                     <NavbarBrand href="/">EDVA</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>

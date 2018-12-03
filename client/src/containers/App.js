@@ -5,6 +5,7 @@ import Login from '../components/Login';
 import Dashboard from '../components/Dashboard';
 import About from '../components/About';
 import Home from '../components/Home';
+import SearchTweets from '../components/SearchTweets';
 import withAuthentication from '../containers/withAuthentication';
 import Footer1 from '../components/Footer1';
 //import 'bootstrap/dist/css/bootstrap.css';
@@ -22,6 +23,8 @@ class App extends Component {
                         <Route path="/dashboard" component={withAuthentication(Dashboard)} />
                         <Route path="/about" component={About} />
                         <Route path="/home" component={Home} />
+                        <Route path="/searchtweets" component={SearchTweets} />
+
                     </Switch>
                 </Router>
                 <Footer1/>

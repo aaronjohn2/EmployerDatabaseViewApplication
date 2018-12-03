@@ -5,8 +5,8 @@ import './Home.css';
 import Navbar1 from '../components/Navbar1';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import Layout from '../containers/Layout';
-import { auth } from '../firebase';
+//import Layout from '../containers/Layout';
+//import { auth } from '../firebase';
 
 class Home extends  Component {
     constructor(props) {
