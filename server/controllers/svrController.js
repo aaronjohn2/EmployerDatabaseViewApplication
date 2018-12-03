@@ -24,13 +24,21 @@ module.exports.addNewData = (req, res) => {
 module.exports.addNewUser = (req, res) => {
     let newUserItem = new UserColl(req.body);
 
-    newUserItem.save((err, userItem) =>{
+    UserColl.find({uid: newUserItem.uid}, (err, userItem) => {
         if (err) {
-            res.send(err);
-        } else if (userItem.length === 0) {
-            res.send(404)
+            res.send(err)
+        } else if (userItem.length > 0) {
+            res.send(409);
         } else {
-            res.json(userItem);
+            newUserItem.save((err, userItem) =>{
+                if (err) {
+                    res.send(err);
+                } else if (userItem.length === 0) {
+                    res.send(404)
+                } else {
+                    res.json(userItem);
+                }
+            });
         }
     });
 };
