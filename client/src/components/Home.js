@@ -19,11 +19,11 @@ class Home extends  Component {
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({companyName: event.target.companyName});
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        alert('A name was submitted: ' + this.state.companyName);
         event.preventDefault();
     }
 

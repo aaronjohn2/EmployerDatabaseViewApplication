@@ -28,7 +28,7 @@ module.exports.addNewUser = (req, res) => {
         if (err) {
             res.send(err);
         } else if (userItem.length === 0) {
-            res.send(404)
+            res.send(404);
         } else {
             res.json(userItem);
         }
@@ -40,7 +40,7 @@ module.exports.getData = (req, res) => {
         if (err) {
             res.send(err);
         } else if (dataItem.length === 0) {
-            res.send(404)
+            res.status(404)
         } else {
             res.json(dataItem);
         }
@@ -52,7 +52,8 @@ module.exports.getUser = (req, res) => {
         if (err) {
             res.send(err);
         } else if (userItem.length === 0) {
-            res.send(404)
+            console.log('Empty response, return 404');
+            res.status(404);
         } else {
             res.json(userItem);
         }
@@ -66,7 +67,7 @@ module.exports.getDataByID = (req, res) => {
     if (err) {
         res.send(err);
     } else if (dataItem.length === 0) {
-        res.send(404)
+        res.status(404)
     } else {
         res.json(dataItem);
     }
@@ -78,7 +79,8 @@ module.exports.getUserByID = (req, res) => {
         if (err) {
             res.send(err)
         } else if (userItem.length === 0) {
-            res.send(404)
+            console.log('Empty response, return 404');
+            res.send(404);
         } else {
             res.json(userItem);
         }
@@ -101,7 +103,7 @@ module.exports.updateDataByID = (req, res) => {
         if (err) {
             res.send(err);
         } else if (dataItem.length === 0) {
-            res.send(404)
+            res.status(404)
         } else {
             res.json(dataItem);
         }
@@ -109,6 +111,9 @@ module.exports.updateDataByID = (req, res) => {
 };
 
 module.exports.updateUserByID = (req, res) => {
+
+        console.log('User data to update' + req.body);
+
         let data = {
             "access_level": req.body["access_level"],
             "company": req.body["company"]
@@ -119,7 +124,7 @@ module.exports.updateUserByID = (req, res) => {
         if (err) {
             res.send(err);
         } else if (userItem.length === 0) {
-            res.send(404)
+            res.status(404)
         } else {
             res.json(userItem);
         }

@@ -36,40 +36,74 @@ const buttonList = {
 
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            createNewUser: false,
+            uid: ''
+        }
+
+
+    }
+
     componentDidMount() {
         auth.getAuth().onAuthStateChanged(user => {
             if (user) {
+
+                this.setState({
+                    uid: user.uid
+                });
+
                 console.log('User logged in as: ' + user.uid);
+
                 axios.get(host_url + '/user/' + user.uid)
                     .then( res => {
+                        console.log('Res status' + res.status);
                         if (res.status === 200) {
-                            console.log(res.data, res.data['company']);
-                            if (res.data['company'] != null && res.data['company'] != ''
-                            && res.data['company'].length > 1) {
+                            console.log(res.data);
+
+                            let company = res.data['0']['company'];
+                            console.log('Company is: ' + company);
+                            if (company != null && company != ''
+                            && company.length > 1) {
                                 this.props.history.push('/home');
                             } else {
                                 this.props.history.push('/dashboard');
                             }
                         } else {
-                            let data = {
-                                uid: user.uid,
-                                email: user.email,
-                                access_level: '',
-                                company: ''
-                            };
-                            axios.post(host_url + '/data', data)
-                                .then( (res) => {
-                                    if(res.data._id) {
-                                        console.log(res)
-                                        // this.props.history.push('/dashboard');
-                                    } else {
-                                        alert('Couldnt register your account, try again');
-                                    }
-                                } )
+                            console.log('ELSE');
                         }
                     })
+                    .catch(error => {
 
-            }
+                        this.setState({createNewUser: true });
+                        console.log('User sign in error is: ' + error);
+
+                        console.log('Creating user in db');
+                        let data = {
+                            "uid": user.uid,
+                            "email": user.email,
+                            "access_level": '',
+                            "company": ''
+                        };
+                        axios.post(host_url + '/user', data)
+                            .then( (res) => {
+                                if(res.data._id) {
+                                    console.log('Data to be posted' + res.data);
+                                    this.props.history.push('/dashboard');
+                                } else {
+                                    alert('Couldnt register your account, try again');
+                                }
+                            } )
+                            .catch( error => {
+                                console.log('Error on user post' + error.toString())
+                            })
+                    })
+                    .finally( final => {
+                        console.log('Finally');
+                    })
+                }
         });
     }
 

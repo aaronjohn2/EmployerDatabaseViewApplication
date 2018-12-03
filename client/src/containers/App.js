@@ -13,6 +13,16 @@ import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+            cur_user_uid: ''
+        }
+    }
+
     render() {
         return (
             <div>
@@ -21,7 +31,7 @@ class App extends Component {
                         <Route path="/" exact component={Login} />
                         <Route path="/dashboard" component={withAuthentication(Dashboard)} />
                         <Route path="/about" component={About} />
-                        <Route path="/home" component={Home} />
+                        <Route path="/home" component={withAuthentication(Home)} />
                     </Switch>
                 </Router>
                 <Footer1/>
