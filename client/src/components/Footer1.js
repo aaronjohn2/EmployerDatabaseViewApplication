@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { Col, Container, Row, Footer } from "mdbreact";
+import './Home.css';
 
 class Footer1 extends Component {
     render() {
         return (
-            <Footer color="green" className="font-small pt-4 mt-4">
+            <Footer color="green" className="font-small pt-4 mt-4" >
                 <Container fluid className="text-center text-md-left">
                     <Row>
                         <Col md="6">
                             <h5 className="title">CMPE 172 Final Project</h5>
                             <p>
-                                Team members:
+
                             </p>
                         </Col>
                         <Col md="6">
-                            <h5 className="title">Links</h5>
+                            <h5> Team Members: </h5>
                             <ul>
-                                <li className="list-unstyled">
-                                    <a href="#!">Link 1</a>
+                                <li className="list-unstyled" >
+                                    <h5> Nikita, Raghav, Sam, Aaron, Tahsin</h5>
                                 </li>
 
                             </ul>

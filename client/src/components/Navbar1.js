@@ -7,10 +7,11 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    // UncontrolledDropdown,
+    // DropdownToggle,
+    // DropdownMenu,
+    // DropdownItem
+    } from 'reactstrap';
 import * as auth from "../firebase/auth";
 
 class Navbar1 extends Component {
@@ -29,8 +30,10 @@ class Navbar1 extends Component {
     }
     render() {
         return (
+
             <div>
-                <Navbar color="light" light expand="md">
+
+                <Navbar className="navbar navbar-expand-sm bg-success navbar-dark"  >
                     <NavbarBrand href="/">EDVA</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -39,7 +42,7 @@ class Navbar1 extends Component {
                                 <NavLink href="/Dashboard/">Dashboard</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/Home/">Home</NavLink>
+                                <NavLink href="/Home/">Data Table</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/aaronjohn2/EmployerDatabaseViewApplication.git">Github</NavLink>
@@ -55,6 +58,7 @@ class Navbar1 extends Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
+
             </div>
         );
     }

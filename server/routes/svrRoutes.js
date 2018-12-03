@@ -13,6 +13,10 @@ let {
     updateUserByID
 } = require('../controllers/svrController');
 
+let {
+    getTweetData
+} = require('../twitter');
+
 const routes = (app) => {
     app.route('/data')
         .get((req, res, next) => {
@@ -24,6 +28,12 @@ const routes = (app) => {
 
         // POST endpoint
         .post(addNewData);
+
+    app.route('/data/twitter')
+        .get((req, res) => {
+            getTweetData(req, res);
+        });
+
     app.route('/data/:dataId')
         // get specific data Item
         .get(getDataByID)
@@ -31,6 +41,7 @@ const routes = (app) => {
         .put(updateDataByID)
         // delete request
         .delete(deleteDataByID);
+
 //    app.route('/data/:dataManId')
         // get all field for that manager
 //        .get(getDataByManID)
