@@ -35,6 +35,7 @@ class EmployeeInfo extends React.PureComponent {
                 { name: 'salary', title: 'Salary' },
                 { name: 'manager_id', title: 'Manager ID' },
                 { name: 'position', title: 'Position' },
+                { name: 'access_level', title: 'Access level' },
                 { name: 'company', title: 'Company' },
             ],
             rows: [],
@@ -68,7 +69,7 @@ class EmployeeInfo extends React.PureComponent {
         });
 
         const {
-            first_name, last_name, email, salary, manager_id, position, company
+            first_name, last_name, email, salary, manager_id, position, access_level, company
         } = data;
 
 
@@ -102,6 +103,11 @@ class EmployeeInfo extends React.PureComponent {
             return false;
         }
 
+        if (!access_level || access_level === '' ) {
+            alert('Access level cannot be empty');
+            return false;
+        }
+
         if (!(!isNaN(parseFloat(salary)) && isFinite(salary))) {
             alert('salary can only contain numbers');
             return false;
@@ -124,6 +130,10 @@ class EmployeeInfo extends React.PureComponent {
 
         if (added) {
             let data = added[0];
+
+            data['access_level'] = this.state.user_access;
+            data['manager_id'] = this.state.uid;
+            data['company'] = this.state.user_company;
 
             if (this.checkData(data)) {
                 //data = this.checkData(data);
@@ -206,11 +216,11 @@ class EmployeeInfo extends React.PureComponent {
                     let newRowsState = [];
                     rows.forEach((row, index) => {
                         const {
-                            first_name, last_name, email, salary, manager_id, position, company, _id
+                            first_name, last_name, email, salary, manager_id, position, access_level, company, _id
                         } = row;
 
                         newRowsState.push({ //pushing data to new const newRowState
-                            _id, first_name, last_name, email, salary, manager_id, position, company,
+                            _id, first_name, last_name, email, salary, manager_id, position, access_level, company,
                             id: index
                         })
                     });

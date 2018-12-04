@@ -91,9 +91,10 @@ class Login extends Component {
                                 if(res.data._id) {
                                     console.log('Data to be posted' + res.data);
                                     this.props.history.push('/dashboard');
-                                } else {
-                                    alert('Couldnt register your account, try again');
                                 }
+                                // else {
+                                //     alert('Couldnt register your account, try again');
+                                // }
                             } )
                             .catch( error => {
                                 console.log('Error on user post' + error.toString())
