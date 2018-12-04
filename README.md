@@ -8,7 +8,7 @@ This repo is an enterprise application where a user can manage a employee databa
     Jenkins/Ansible Integration with Github
     MongoDB Integration with Mlab Host
 
-Instructions to start:
+Instructions to start webapp:
 
 ```
 npm run install-all
