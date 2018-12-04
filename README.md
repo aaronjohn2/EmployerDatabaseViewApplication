@@ -6,7 +6,7 @@ This repo is an enterprise application where a user can manage a employee databa
     
     Additional Features include:
     Jenkins/Ansible Integration with Github
-    MongoDB Integration
+    MongoDB Integration with Mlab Host
 
 Instructions to start:
 
