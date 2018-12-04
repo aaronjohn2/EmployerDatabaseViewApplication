@@ -16,7 +16,6 @@ class AddManager extends Component {
             new_user: ''
         };
 
-        console.log('UID ' + this.state.cur_uuid);
 
         this.handleChange = this.handleChange.bind(this);
         this.getCurUser = this.getCurUser.bind(this);

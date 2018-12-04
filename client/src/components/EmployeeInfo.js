@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Card } from 'reactstrap';
 import { EditingState } from '@devexpress/dx-react-grid';
+import {host_url} from "./Login";
+import {auth} from '../firebase'
+
 import {
     Grid,
     Table,
@@ -12,7 +15,8 @@ import axios from 'axios';
 
 const getRowId = row => row.id;
 
-const host_url = 'http://localhost:3001';
+
+
 
 class EmployeeInfo extends React.PureComponent {
     constructor(props) {
@@ -21,6 +25,7 @@ class EmployeeInfo extends React.PureComponent {
 
         this.loadData();
         this.state = {
+            uid: auth.getAuth().currentUser.uid,
             columns: [
                 { name: 'uid', title: 'ID' },
                 { name: 'first_name', title: 'First Name' },
@@ -35,6 +40,7 @@ class EmployeeInfo extends React.PureComponent {
         };
 
         this.commitChanges = this.commitChanges.bind(this);
+        this.loadData = this.loadData.bind(this);
     }
 
     checkData = (data) => {
@@ -139,7 +145,7 @@ class EmployeeInfo extends React.PureComponent {
                     data.salary = `${data.salary}`;
                     if (this.checkData(data)) {
                         const id = data._id;
-                        delete data['_id']
+                        delete data['_id'];
                         axios.put(host_url + `/data/${id}`, data)
                             .then(res => {
                                 if (res.status === 200) {
@@ -169,8 +175,12 @@ class EmployeeInfo extends React.PureComponent {
         }
     }
 
-    loadData = () => {
-        axios.get(host_url + '/data') //endpoint route
+    loadData = (event) => {
+        // console.log('Still UID? ' + this.state.uid);
+
+        let uid = auth.getAuth().uid;
+
+        axios.get(host_url + `/data/${uid}`) //endpoint route
             .then(res => {
                 if(res.status === 200) {
                     const rows = res.data;
@@ -191,7 +201,7 @@ class EmployeeInfo extends React.PureComponent {
                     alert('unable to fetch data, try again');
                 }
             })
-    }
+    };
 
     render() {
         const { rows, columns } = this.state;
