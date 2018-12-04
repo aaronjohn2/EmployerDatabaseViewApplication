@@ -23,11 +23,12 @@ class EmployeeInfo extends React.PureComponent {
         super(props);
 // //id, firstName, lastName, email, position, task, company
 
-        this.loadData();
         this.state = {
             uid: auth.getAuth().currentUser.uid,
+            user_company: '',
+            user_access: '',
             columns: [
-                { name: 'uid', title: 'ID' },
+                // { name: 'uid', title: 'ID' },
                 { name: 'first_name', title: 'First Name' },
                 { name: 'last_name', title: 'Last Name' },
                 { name: 'email', title: 'Email' },
@@ -39,9 +40,27 @@ class EmployeeInfo extends React.PureComponent {
             rows: [],
         };
 
+        this.getUserInfo();
+
         this.commitChanges = this.commitChanges.bind(this);
-        this.loadData = this.loadData.bind(this);
+        // this.loadData = this.loadData.bind(this);
     }
+
+    getUserInfo = () => {
+
+        axios.get(host_url + `/user/${this.state.uid}`)
+            .then( res => {
+                if(res.status === 200) {
+                    this.setState({user_company: res.data['0']['company']});
+                    this.setState({user_access: '' + res.data['0']['access_level']});
+                    // console.log('User company: ' + this.state.user_company);
+                    // console.log('User access level: ' + this.state.user_access);
+                }
+            })
+            .finally( () => {
+                this.loadData();
+            })
+    };
 
     checkData = (data) => {
         Object.keys(data).forEach(key => {
@@ -49,13 +68,9 @@ class EmployeeInfo extends React.PureComponent {
         });
 
         const {
-            uid, first_name, last_name, email, salary, manager_id, position, company
+            first_name, last_name, email, salary, manager_id, position, company
         } = data;
 
-        if (!uid || uid === '') {
-            alert('ID cannot be left blank');
-            return false;
-        }
 
         if (!first_name || first_name === '') {
             alert('First Name cannot be left blank');
@@ -175,23 +190,27 @@ class EmployeeInfo extends React.PureComponent {
         }
     }
 
-    loadData = (event) => {
-        // console.log('Still UID? ' + this.state.uid);
+    loadData = () => {
 
-        let uid = auth.getAuth().uid;
+        console.log('Company ' + this.state.user_company);
 
-        axios.get(host_url + `/data/${uid}`) //endpoint route
+        axios.get(host_url + '/getdata', {params: {
+            uid: this.state.uid,
+            company: this.state.user_company,
+            access_level: this.state.user_access
+        }}
+            ) //endpoint route
             .then(res => {
                 if(res.status === 200) {
                     const rows = res.data;
                     let newRowsState = [];
                     rows.forEach((row, index) => {
                         const {
-                            uid, first_name, last_name, email, salary, manager_id, position, company, _id
+                            first_name, last_name, email, salary, manager_id, position, company, _id
                         } = row;
 
                         newRowsState.push({ //pushing data to new const newRowState
-                            _id, uid, first_name, last_name, email, salary, manager_id, position, company,
+                            _id, first_name, last_name, email, salary, manager_id, position, company,
                             id: index
                         })
                     });
@@ -200,6 +219,9 @@ class EmployeeInfo extends React.PureComponent {
                 } else {
                     alert('unable to fetch data, try again');
                 }
+            })
+            .catch( error => {
+                console.log(error.toString());
             })
     };
 

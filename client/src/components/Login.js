@@ -64,7 +64,7 @@ class Login extends Component {
 
                             let company = res.data['0']['company'];
                             console.log('Company is: ' + company);
-                            if (company != null && company != ''
+                            if (company !== null && company !== ''
                             && company.length > 1) {
                                 this.props.history.push('/home');
                             } else {

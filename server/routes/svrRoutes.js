@@ -43,6 +43,8 @@ const routes = (app) => {
         // delete request
         .delete(deleteDataByID);
 
+    app.get('/getdata', getDataByManID);
+
 //    app.route('/data/:dataManId')
         // get all field for that manager
 //        .get(getDataByManID)

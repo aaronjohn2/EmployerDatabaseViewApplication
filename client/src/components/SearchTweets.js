@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import Navbar2 from '../components/Navbar2';
 import 'bootstrap/dist/css/bootstrap.css';
+import {host_url} from "./Login";
 
 //import Layout from '../containers/Layout';
 
@@ -11,7 +12,7 @@ import axios from "axios";
 
 class SearchTweets extends Component {
     componentDidMount(){
-        axios.get('http://localhost:3001/data/twitter') //endpoint route
+        axios.get(host_url + '/data/twitter') //endpoint route
             .then(res => {
                 if (res.status === 200) {
                     const tweets = res.data;

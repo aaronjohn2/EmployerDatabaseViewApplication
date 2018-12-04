@@ -2,7 +2,6 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 Schema.exports = mongoose.model('dataModel',{
-    uid: String,
     first_name: {
         type:String,
         required: 'Enter a first name'
