@@ -24,13 +24,21 @@ module.exports.addNewData = (req, res) => {
 module.exports.addNewUser = (req, res) => {
     let newUserItem = new UserColl(req.body);
 
-    newUserItem.save((err, userItem) =>{
+    UserColl.find({uid: newUserItem.uid}, (err, userItem) => {
         if (err) {
-            res.send(err);
-        } else if (userItem.length === 0) {
-            res.send(404);
+            res.send(err)
+        } else if (userItem.length > 0) {
+            res.send(409);
         } else {
-            res.json(userItem);
+            newUserItem.save((err, userItem) =>{
+                if (err) {
+                    res.send(err);
+                } else if (userItem.length === 0) {
+                    res.send(404);
+                } else {
+                    res.json(userItem);
+                }
+            });
         }
     });
 };
@@ -40,7 +48,7 @@ module.exports.getData = (req, res) => {
         if (err) {
             res.send(err);
         } else if (dataItem.length === 0) {
-            res.status(404)
+            res.send(404)
         } else {
             res.json(dataItem);
         }
@@ -52,8 +60,7 @@ module.exports.getUser = (req, res) => {
         if (err) {
             res.send(err);
         } else if (userItem.length === 0) {
-            console.log('Empty response, return 404');
-            res.status(404);
+            res.send(404)
         } else {
             res.json(userItem);
         }
@@ -67,7 +74,7 @@ module.exports.getDataByID = (req, res) => {
     if (err) {
         res.send(err);
     } else if (dataItem.length === 0) {
-        res.status(404)
+        res.send(404)
     } else {
         res.json(dataItem);
     }
@@ -79,31 +86,35 @@ module.exports.getUserByID = (req, res) => {
         if (err) {
             res.send(err)
         } else if (userItem.length === 0) {
-            console.log('Empty response, return 404');
-            res.send(404);
+            res.send(404)
         } else {
             res.json(userItem);
         }
     });
 };
 
-/*
+
 module.exports.getDataByManID = (req, res) => {
-    DataColl.findByManId(req.params.dataManId, (err, dataItem) => {
+    UserColl.find({uid: req.params.userId}, (err, userItem) => {
+        let obj = JSON.parse(userItem);
+    console.log(userItem);
+    console.log(obj["uid"]);
+
+//    DataColl.findByManId(req.params.dataManId, (err, dataItem) => {
         if (err) {
             res.send(err);
         }
-        res.json(dataItem);
-    });
+            res.json(userItem);
+        }
+    );
 };
-*/
 
 module.exports.updateDataByID = (req, res) => {
     DataColl.findOneAndUpdate({ _id: req.params.dataId}, req.body, {new: true}, (err, dataItem) => {
         if (err) {
             res.send(err);
         } else if (dataItem.length === 0) {
-            res.status(404)
+            res.send(404)
         } else {
             res.json(dataItem);
         }
@@ -111,9 +122,6 @@ module.exports.updateDataByID = (req, res) => {
 };
 
 module.exports.updateUserByID = (req, res) => {
-
-        console.log('User data to update' + req.body);
-
         let data = {
             "access_level": req.body["access_level"],
             "company": req.body["company"]
@@ -124,7 +132,7 @@ module.exports.updateUserByID = (req, res) => {
         if (err) {
             res.send(err);
         } else if (userItem.length === 0) {
-            res.status(404)
+            res.send(404)
         } else {
             res.json(userItem);
         }
