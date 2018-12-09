@@ -4,6 +4,9 @@
   "description": "Project for CMPE 172",
   "main": "src/firebase/firebase.js",
   "dependencies": {
+    "webpack-visualizer-plugin": "^0.1.11"
+  },
+  "devDependencies": {
     "@devexpress/dx-react-core": "^1.9.0",
     "@devexpress/dx-react-grid": "^1.9.0",
     "@devexpress/dx-react-grid-bootstrap4": "^1.9.0",
@@ -22,7 +25,6 @@
     "semantic-ui-react": "^0.83.0",
     "twit": "^2.2.5"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -39,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication/issues"
   },
-  "homepage": "https://github.com/aaronjohn2/EmployerDatabaseViewApplication#readme",
+  "homepage": ".",
   "browserslist": [
     ">0.2%",
     "not dead",
