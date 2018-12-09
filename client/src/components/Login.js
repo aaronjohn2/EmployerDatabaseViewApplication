@@ -8,7 +8,9 @@ import Navbar2 from '../components/Navbar2';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
-export const host_url = 'http://localhost:3001';
+// export const host_url = 'http://localhost:3001';
+export const host_url = window.location.href;
+console.log('Host url is: ' + host_url);
 
 const buttonList = {
     google: {
@@ -115,7 +117,8 @@ class Login extends Component {
 
             <Layout contentCenter={true}>
 
-                <p>Signin using Google Single Sign-on</p>
+                <p>Signin using Google Single Sign-on, link is {host_url}</p>
+                <p>Current link is {host_url}</p>
                 <SocialButtonList buttonList={buttonList} auth={auth.getAuth} />
                 <Link to="/searchtweets"> click to view EDVA's user review tweets</Link>
             </Layout>
