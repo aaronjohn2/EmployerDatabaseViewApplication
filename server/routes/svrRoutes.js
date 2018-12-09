@@ -20,9 +20,6 @@ let {
 
 const routes = (app) => {
 
-    app.get('*', (req, res)=>{
-        res.redirect('/index.html');
-    });
 
     app.route('/data')
         .get((req, res, next) => {

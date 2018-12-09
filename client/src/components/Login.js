@@ -9,7 +9,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
 // export const host_url = 'http://localhost:3001';
-export const host_url = window.location.href;
+
+const PORT = '3001';
+export const host_url = window.location.protocol + "//" + window.location.hostname + ':' + PORT;
 console.log('Host url is: ' + host_url);
 
 const buttonList = {
