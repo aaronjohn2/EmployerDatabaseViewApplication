@@ -10,7 +10,8 @@
     "express": "^4.16.4",
     "mongoose": "^5.3.12",
     "morgan": "^1.9.1",
-    "mysql2": "^1.6.4"
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

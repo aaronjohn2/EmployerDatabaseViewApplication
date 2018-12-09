@@ -34,7 +34,7 @@ module.exports.addNewUser = (req, res) => {
                 if (err) {
                     res.send(err);
                 } else if (userItem.length === 0) {
-                    res.send(404)
+                    res.send(404);
                 } else {
                     res.json(userItem);
                 }
@@ -95,18 +95,25 @@ module.exports.getUserByID = (req, res) => {
 
 
 module.exports.getDataByManID = (req, res) => {
-    UserColl.find({uid: req.params.userId}, (err, userItem) => {
-        let obj = JSON.parse(userItem);
-    console.log(userItem);
-    console.log(obj["uid"]);
 
-//    DataColl.findByManId(req.params.dataManId, (err, dataItem) => {
-        if (err) {
+    console.log('UID: ' + req.query.uid);
+    console.log('Company: ' + req.query.company);
+    console.log('Access level: ' + req.query.access_level);
+
+    DataColl.find({
+            $or: [
+                { $and: [   { manager_id: req.query.uid }, { company: req.query.company } ] },
+                { $and: [   { company: req.query.company }, { access_level: { $gt: parseInt(req.query.access_level) } } ] }
+        ]
+    }, function(err, dataItem) {
+        if(err) {
             res.send(err);
+        } else if(dataItem.length === 0) {
+            res.send(404);
+        } else {
+            res.json(dataItem);
         }
-            res.json(userItem);
-        }
-    );
+    });
 };
 
 module.exports.updateDataByID = (req, res) => {

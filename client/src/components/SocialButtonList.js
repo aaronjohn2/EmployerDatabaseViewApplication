@@ -31,7 +31,8 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
     const authHandler = authData => {
         if (authData) {
             if (currentProviders === null) {
-                history.push('/dashboard');
+                // history.push('/dashboard');
+                console.log('');
             } else {
                 currentProviders(authData.user.providerData);
             }

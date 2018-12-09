@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Card } from 'reactstrap';
 import { EditingState } from '@devexpress/dx-react-grid';
+import {host_url} from "./Login";
+import {auth} from '../firebase'
+
 import {
     Grid,
     Table,
@@ -12,28 +15,53 @@ import axios from 'axios';
 
 const getRowId = row => row.id;
 
+
+
+
 class EmployeeInfo extends React.PureComponent {
     constructor(props) {
         super(props);
 // //id, firstName, lastName, email, position, task, company
 
-        this.loadData();
         this.state = {
+            uid: auth.getAuth().currentUser.uid,
+            user_company: '',
+            user_access: '',
             columns: [
-                { name: 'uid', title: 'ID' },
+                // { name: 'uid', title: 'ID' },
                 { name: 'first_name', title: 'First Name' },
                 { name: 'last_name', title: 'Last Name' },
                 { name: 'email', title: 'Email' },
                 { name: 'salary', title: 'Salary' },
                 { name: 'manager_id', title: 'Manager ID' },
                 { name: 'position', title: 'Position' },
+                { name: 'access_level', title: 'Access level' },
                 { name: 'company', title: 'Company' },
             ],
             rows: [],
         };
 
+        this.getUserInfo();
+
         this.commitChanges = this.commitChanges.bind(this);
+        // this.loadData = this.loadData.bind(this);
     }
+
+    getUserInfo = () => {
+
+        axios.get(host_url + `/user/${this.state.uid}`)
+            .then( res => {
+                if(res.status === 200) {
+                    this.setState({user_company: res.data['0']['company']});
+                    this.setState({user_access: '' + res.data['0']['access_level']});
+                    // console.log('User company: ' + this.state.user_company);
+                    // console.log('User access level: ' + this.state.user_access);
+                }
+            })
+            .finally( () => {
+                this.loadData();
+            })
+    };
 
     checkData = (data) => {
         Object.keys(data).forEach(key => {
@@ -41,41 +69,42 @@ class EmployeeInfo extends React.PureComponent {
         });
 
         const {
-            uid, first_name, last_name, email, salary, manager_id, position, company
-        } = data
+            first_name, last_name, email, salary, manager_id, position, access_level, company
+        } = data;
 
-        if (!uid || uid === '') {
-            alert('ID cannot be left blank')
-            return false;
-        }
 
         if (!first_name || first_name === '') {
-            alert('First Name cannot be left blank')
+            alert('First Name cannot be left blank');
             return false;
         }
 
         if (!last_name || last_name ==='') {
-            alert('Last Name cannot be left blank')
+            alert('Last Name cannot be left blank');
             return false;
         }
         if (!email || email === '') {
-            alert('Email cannot be left blank')
+            alert('Email cannot be left blank');
             return false;
         }
         if (!salary || salary === '') {
-            alert('Salary cannot be left blank')
+            alert('Salary cannot be left blank');
             return false;
         }
         if (!manager_id || manager_id ==='') {
-            alert('Manager id cannot be left blank')
+            alert('Manager id cannot be left blank');
             return false;
         }
         if (!position || position === '') {
-            alert('Position cannot be left blank')
+            alert('Position cannot be left blank');
             return false;
         }
         if (!company || company ==='') {
-            alert('Company name cannot be left blank')
+            alert('Company name cannot be left blank');
+            return false;
+        }
+
+        if (!access_level || access_level === '' ) {
+            alert('Access level cannot be empty');
             return false;
         }
 
@@ -88,24 +117,28 @@ class EmployeeInfo extends React.PureComponent {
         //console.log(data);
 
         return true;
-    }
+    };
 
 
 
     commitChanges({ added, changed, deleted }) {
         let { rows } = this.state;
         // const data = added[0];
-        // axios.post('http://localhost:3001/data', data)
+        // axios.post(host_url + '/data', data)
         //     .then((data) => console.log(data))
         //     .catch(err => console.log(err))
 
         if (added) {
             let data = added[0];
 
+            data['access_level'] = this.state.user_access;
+            data['manager_id'] = this.state.uid;
+            data['company'] = this.state.user_company;
+
             if (this.checkData(data)) {
                 //data = this.checkData(data);
 
-                axios.post('http://localhost:3001/data', data)
+                axios.post(host_url + '/data', data)
                     .then((res) => {
                         if(res.data._id) {
                             console.log(res);
@@ -119,8 +152,7 @@ class EmployeeInfo extends React.PureComponent {
                             ];
                             console.log(rows);
                             this.setState({ rows });
-                        }
-                        else {
+                        } else {
                             alert('unable to add. please check the data you entered');
                         }
                     })
@@ -138,8 +170,8 @@ class EmployeeInfo extends React.PureComponent {
                     data.salary = `${data.salary}`;
                     if (this.checkData(data)) {
                         const id = data._id;
-                        delete data['_id']
-                        axios.put(`http://localhost:3001/data/${id}`, data)
+                        delete data['_id'];
+                        axios.put(host_url + `/data/${id}`, data)
                             .then(res => {
                                 if (res.status === 200) {
                                     rows = rows.map(row => (changed[row.id] ? { ...row, ...changed[row.id] } : row));
@@ -153,7 +185,7 @@ class EmployeeInfo extends React.PureComponent {
         if (deleted) {
             rows.map(row => {
                 if (deleted[0] === row.id) {
-                    axios.delete(`http://localhost:3001/data/${row._id}`)
+                    axios.delete(host_url + `/data/${row._id}`)
                         .then(res => {
                             if (res.status === 200) {
                                 const deletedSet = new Set(deleted);
@@ -161,7 +193,7 @@ class EmployeeInfo extends React.PureComponent {
                                 this.setState({ rows });
                             }
                         });
-                };
+                }
             })
 
 
@@ -169,28 +201,39 @@ class EmployeeInfo extends React.PureComponent {
     }
 
     loadData = () => {
-        axios.get('http://localhost:3001/data') //endpoint route
+
+        console.log('Company ' + this.state.user_company);
+
+        axios.get(host_url + '/getdata', {params: {
+            uid: this.state.uid,
+            company: this.state.user_company,
+            access_level: this.state.user_access
+        }}
+            ) //endpoint route
             .then(res => {
                 if(res.status === 200) {
                     const rows = res.data;
                     let newRowsState = [];
                     rows.forEach((row, index) => {
                         const {
-                            uid, first_name, last_name, email, salary, manager_id, position, company, _id
+                            first_name, last_name, email, salary, manager_id, position, access_level, company, _id
                         } = row;
 
                         newRowsState.push({ //pushing data to new const newRowState
-                            _id, uid, first_name, last_name, email, salary, manager_id, position, company,
+                            _id, first_name, last_name, email, salary, manager_id, position, access_level, company,
                             id: index
                         })
-                    })
+                    });
 
                     this.setState({ rows: newRowsState})
                 } else {
                     alert('unable to fetch data, try again');
                 }
             })
-    }
+            .catch( error => {
+                console.log(error.toString());
+            })
+    };
 
     render() {
         const { rows, columns } = this.state;

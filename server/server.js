@@ -23,7 +23,6 @@ const host = process.env.DB_HOST;
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 
-// const dbRoute = "mongodb://stivens:1234567890a@ds037824.mlab.com:37824/edva";
 const dbRoute = "mongodb://" + user + ":" + pass + "@" + host;
 console.log(dbRoute);
 
