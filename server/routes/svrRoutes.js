@@ -1,10 +1,7 @@
-// import {addNewData} from "../controllers/svrController";
-
 let {
     addNewData,
     getData,
     getDataByID,
-//    getDataByManID,
     updateDataByID,
     deleteDataByID,
     addNewUser,
@@ -47,10 +44,6 @@ const routes = (app) => {
 
     app.get('/getdata', getDataByManID);
 
-//    app.route('/data/:dataManId')
-        // get all field for that manager
-//        .get(getDataByManID)
-    // get specific data Item
     app.route('/user')
         .post(addNewUser)
 
