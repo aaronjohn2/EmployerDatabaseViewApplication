@@ -26,7 +26,7 @@ class Navbar2 extends Component {
     render() {
         return (
             <div >
-                <Navbar className="navbar navbar-expand-sm bg-success navbar-dark" >
+                <Navbar className="navbar navbar-expand-sm bg-success navbar-dark bg-dark" >
                     <NavbarBrand href="/">EDVA</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
