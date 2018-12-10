@@ -119,8 +119,7 @@ class Login extends Component {
 
             <Layout contentCenter={true}>
 
-                <p>Signin using Google Single Sign-on, link is {host_url}</p>
-                <p>Current link is {host_url}</p>
+                <p>Signin using Google Single Sign-on</p>
                 <SocialButtonList buttonList={buttonList} auth={auth.getAuth} />
                 <Link to="/searchtweets"> click to view EDVA's user review tweets</Link>
             </Layout>
